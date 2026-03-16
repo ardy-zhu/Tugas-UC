@@ -1,150 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PORTOFOLIO</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="mystyle.css" />
+    <title>PORTOFOLIO</title>
+  </head>
 
-<style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.container {
-    width: 800px;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    background: white;
-}
-
-.portfolio-title {
-    height: 15%;
-    background: #ECA400;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.portfolio-title h1 {
-    color: white;
-    font-size: 32px;
-    margin: 0;
-}
-
-.content {
-    height: 75%;
-    display: flex;
-}
-
-.sidebar {
-    width: 25%;
-    padding: 30px;
-}
-
-.sidebar-list {
-    list-style-type: circle;
-    padding-left: 20px;
-}
-
-.sidebar-list li {
-    margin-bottom: 10px;
-}
-
-.main {
-    width: 75%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.profile-top {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-}
-
-.profile-top img {
-    width: 200px;
-    height: 200px;
-    border-radius: 10%;
-    object-fit: cover;
-}
-
-.footer {
-    height: 10%;
-    display: flex;
-    align-items: center;
-    color: white;
-    justify-content: center;
-    background: #ECA400;
-}
-
-.isiKonten {
-    text-align: justify;
-    font-size: 14px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-    <div class="portfolio-title">
+  <body>
+    <div class="container">
+      <div class="portfolio-title">
         <h1>PORTOFOLIO</h1>
-    </div>
+      </div>
 
-    <div class="content">
-
+      <div class="content">
         <div class="sidebar">
-            <ul class="sidebar-list">
-                <li><a href="#">Beranda</a></li>
-                <li><a href="https://www.linkedin.com/in/ardyzhu/">LinkedIn</a></li>
-                <li><a href="https://uc.ac.id">UC Surabaya</a></li>
-                <li><a href="https://online.uc.ac.id">Clinic</a></li>
-            </ul>
+          <ul class="sidebar-list">
+            <li><a href="#">Beranda</a></li>
+            <li><a href="https://www.linkedin.com/in/ardyzhu/">LinkedIn</a></li>
+            <li><a href="my_job.html">My daily</a></li>
+            <li><a href="hobi.html">Hobi</a></li>
+          </ul>
         </div>
 
         <div class="main">
+          <div class="profile-top">
+            <img
+              src="https://t4.ftcdn.net/jpg/03/26/98/51/240_F_326985142_1aaKcEjMQW6ULp6oI9MYuv8lN9f8sFmj.jpg"
+              alt="handsome guy"
+            />
 
-            <div class="profile-top">
-                <img src="https://t4.ftcdn.net/jpg/03/26/98/51/240_F_326985142_1aaKcEjMQW6ULp6oI9MYuv8lN9f8sFmj.jpg" alt="handsome guy">
-                
-                <div>
-                    <h3>Nama    : Ardyanto Hendrajaya</h3>
-                    <h3>NIM     : 312210001</h3>
-                    <h3>Prodi   : Informatika</h3>
-                </div>
+            <div style="margin-top: 18px">
+              <h3>Nama : Ardyanto Hendrajaya</h3>
+              <h3>NIM : 312210001</h3>
+              <h3>Prodi : Informatika</h3>
             </div>
+          </div>
 
-            <div>
-                <h3>Tentang Saya</h3>
-                <p class="isiKonten">
-                    Saya adalah seorang mahasiswa Informatika yang memiliki minat dalam 
-                    pengembangan perangkat lunak dan teknologi informasi. Saya memiliki 
-                    pengalaman dalam berbagai proyek pengembangan aplikasi, baik secara 
-                    individu maupun dalam tim.
-                </p>
-            </div>
-
+          <div>
+            <h3 style="margin-left: 5px; text-decoration: underline">
+              Tentang Saya
+            </h3>
+            <p class="isiKonten">
+              Saya adalah seorang mahasiswa Informatika yang memiliki minat
+              dalam pengembangan perangkat lunak dan teknologi informasi. Saya
+              memiliki pengalaman dalam berbagai proyek pengembangan aplikasi,
+              baik secara individu maupun dalam tim. Selain berkuliah, saya juga
+              menjalankan usaha perdagangan pakaian grosir di Metro Tanah Abang.
+            </p>
+          </div>
         </div>
+      </div>
 
+      <div class="footer">
+        <p>&copy; 2026 Ardyanto Hendrajaya. All rights reserved,.</p>
+      </div>
     </div>
-
-    <div class="footer">
-            <p>&copy; 2026 Ardyanto Hendrajaya. All rights reserved,.</p>
-    </div>
-
-</div>
-
-</body>
+  </body>
 </html>
