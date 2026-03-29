@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sloty</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div id="container">
+      <div class="game-hud">
+        <div class="hud-row">
+          <span class="hud-label">Balance</span>
+          <strong id="balanceValue">$1000</strong>
+        </div>
+        <div class="hud-row">
+          <span class="hud-label">Bet / Spin</span>
+          <strong>$50</strong>
+        </div>
+        <div class="hud-row">
+          <span class="hud-label">Last Payout</span>
+          <strong id="lastPayout">$0</strong>
+        </div>
+        <div class="hud-row">
+          <span class="hud-label">Payline</span>
+          <strong id="paylineValue">- - - - -</strong>
+        </div>
+        <div class="hud-row">
+          <span class="hud-label">Status</span>
+          <strong id="statusValue" class="status-neutral"
+            >Press Spin to play.</strong
+          >
+        </div>
+      </div>
+
+      <div class="window-border">
+        <div class="window">
+          <div class="outer-spacer"></div>
+          <div class="outer-col">
+            <div class="col"></div>
+          </div>
+          <div class="outer-spacer"></div>
+          <div class="outer-col">
+            <div class="col"></div>
+          </div>
+          <div class="outer-spacer"></div>
+          <div class="outer-col">
+            <div class="col"></div>
+          </div>
+          <div class="outer-spacer"></div>
+          <div class="outer-col">
+            <div class="col"></div>
+          </div>
+          <div class="outer-spacer"></div>
+          <div class="outer-col">
+            <div class="col"></div>
+          </div>
+          <div class="outer-spacer"></div>
+        </div>
+      </div>
+
+      <input
+        type="button"
+        onclick="spin(this)"
+        class="start-button"
+        value="Spin"
+      />
+    </div>
+  </body>
+</html>
