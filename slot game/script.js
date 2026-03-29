@@ -39,14 +39,33 @@ const BASE_SPINNING_DURATION = 2.7;
  */
 const COLUMN_SPINNING_DURATION = 0.3;
 
-const STARTING_BALANCE = 1000;
-const SPIN_COST = 50;
-const JACKPOT_PAYOUT = 777;
-const FIVE_OF_A_KIND_PAYOUT = 300;
-const FOUR_OF_A_KIND_PAYOUT = 160;
-const THREE_OF_A_KIND_PAYOUT = 90;
-const LOSS_THRESHOLD_FOR_BONUS = 200;
-const LOSS_RECOVERY_PAYOUT = 225;
+/**
+ * GAME SETTINGS - Easily configurable game parameters
+ * Modify these values to change game difficulty and behavior
+ */
+const GAME_SETTINGS = {
+  // Balance and betting
+  STARTING_BALANCE: 1000,
+  SPIN_COST: 50,
+
+  // Win payouts
+  JACKPOT_PAYOUT: 777,
+  FIVE_OF_A_KIND_PAYOUT: 300,
+  FOUR_OF_A_KIND_PAYOUT: 160,
+  THREE_OF_A_KIND_PAYOUT: 90,
+
+  // Win limits
+  MAX_WINS_PER_SESSION: 2, // 0 = unlimited wins
+};
+
+// Create shortcuts for easy access to settings
+const STARTING_BALANCE = GAME_SETTINGS.STARTING_BALANCE;
+const SPIN_COST = GAME_SETTINGS.SPIN_COST;
+const JACKPOT_PAYOUT = GAME_SETTINGS.JACKPOT_PAYOUT;
+const FIVE_OF_A_KIND_PAYOUT = GAME_SETTINGS.FIVE_OF_A_KIND_PAYOUT;
+const FOUR_OF_A_KIND_PAYOUT = GAME_SETTINGS.FOUR_OF_A_KIND_PAYOUT;
+const THREE_OF_A_KIND_PAYOUT = GAME_SETTINGS.THREE_OF_A_KIND_PAYOUT;
+const MAX_WINS_PER_SESSION = GAME_SETTINGS.MAX_WINS_PER_SESSION;
 
 var cols;
 var balance = STARTING_BALANCE;
@@ -55,7 +74,10 @@ var balanceValueEl;
 var payoutValueEl;
 var paylineValueEl;
 var statusValueEl;
-var accumulatedLoss = 0;
+var winsCountEl;
+var winsCount = 0;
+var lossesCount = 0;
+var spinsSinceLastWin = 0;
 
 window.addEventListener("DOMContentLoaded", function (event) {
   cols = document.querySelectorAll(".col");
@@ -63,10 +85,12 @@ window.addEventListener("DOMContentLoaded", function (event) {
   payoutValueEl = document.getElementById("lastPayout");
   paylineValueEl = document.getElementById("paylineValue");
   statusValueEl = document.getElementById("statusValue");
+  winsCountEl = document.getElementById("winsCount");
 
   setInitialItems();
   renderHud(0, ["-", "-", "-", "-", "-"]);
   setStatus("Press Spin to play.", "neutral");
+  renderWinLossStats();
 });
 
 function formatMoney(amount) {
@@ -89,6 +113,8 @@ function renderHud(lastPayout, payline) {
   if (paylineValueEl) {
     paylineValueEl.textContent = payline.map(getDisplayLabel).join(" ");
   }
+
+  renderWinLossStats();
 }
 
 function setStatus(message, type) {
@@ -162,24 +188,83 @@ function evaluatePayout(payline) {
   };
 }
 
-function applyLossRecoveryRule(outcome) {
-  if (outcome.payout > 0) {
-    return outcome;
-  }
-
-  accumulatedLoss += SPIN_COST;
-
-  if (accumulatedLoss >= LOSS_THRESHOLD_FOR_BONUS) {
-    accumulatedLoss = 0;
-
+function applyWinLimit(outcome) {
+  // If win limit is enabled and we've reached the limit, convert wins to losses
+  if (
+    GAME_SETTINGS.MAX_WINS_PER_SESSION > 0 &&
+    outcome.payout > 0 &&
+    winsCount >= GAME_SETTINGS.MAX_WINS_PER_SESSION
+  ) {
     return {
-      payout: LOSS_RECOVERY_PAYOUT,
-      message: "Loss shield activated! You win $225 after $200 losses.",
-      type: "win",
+      payout: 0,
+      message: `Win limit reached (${GAME_SETTINGS.MAX_WINS_PER_SESSION} wins). You lose this spin.`,
+      type: "lose",
+      payline: outcome.payline,
     };
   }
 
+  // Count this as a win/loss
+  if (outcome.payout > 0) {
+    winsCount++;
+    spinsSinceLastWin = 0; // Reset spin counter on win
+  } else {
+    lossesCount++;
+    spinsSinceLastWin++; // Increment spin counter on loss
+  }
+
   return outcome;
+}
+
+function getGuaranteedRandomWin() {
+  const winTypes = [
+    { type: "jackpot", icon: "lucky_seven", count: 5 },
+    { type: "five_of_a_kind", icon: "apple", count: 5 },
+    { type: "four_of_a_kind", icon: "cherry", count: 4 },
+    { type: "three_of_a_kind", icon: "banana", count: 3 },
+  ];
+
+  // Pick a random win type
+  const randomWin = winTypes[Math.floor(Math.random() * winTypes.length)];
+
+  // Create a payline with the random win
+  let payline = [];
+  let icon = randomWin.icon;
+
+  if (randomWin.type === "jackpot") {
+    // For jackpot, all lucky_sevens
+    payline = [
+      "lucky_seven",
+      "lucky_seven",
+      "lucky_seven",
+      "lucky_seven",
+      "lucky_seven",
+    ];
+  } else {
+    // For other wins, fill the payline with the icon and some random ones
+    for (let i = 0; i < 5; i++) {
+      if (i < randomWin.count) {
+        payline.push(icon);
+      } else {
+        payline.push(getRandomIcon());
+      }
+    }
+    // Shuffle to make it look more natural
+    payline = payline.sort(() => Math.random() - 0.5);
+  }
+
+  return payline;
+}
+
+function renderWinLossStats() {
+  if (winsCountEl && GAME_SETTINGS.MAX_WINS_PER_SESSION > 0) {
+    const winsRemaining = Math.max(
+      0,
+      GAME_SETTINGS.MAX_WINS_PER_SESSION - winsCount,
+    );
+    winsCountEl.textContent = `Wins: ${winsCount}/${GAME_SETTINGS.MAX_WINS_PER_SESSION} | Losses: ${lossesCount} | Remaining: ${winsRemaining} | Spins to guaranteed win: ${Math.max(0, 5 - spinsSinceLastWin)}`;
+  } else if (winsCountEl) {
+    winsCountEl.textContent = `Wins: ${winsCount} | Losses: ${lossesCount} | Spins to guaranteed win: ${Math.max(0, 5 - spinsSinceLastWin)}`;
+  }
 }
 
 function createIconItem(icon) {
@@ -303,11 +388,7 @@ function spin(elem) {
   window.setTimeout(
     function () {
       let outcome = setResult();
-      outcome = applyLossRecoveryRule(outcome);
-
-      if (outcome.payout > 0) {
-        accumulatedLoss = 0;
-      }
+      outcome = applyWinLimit(outcome);
 
       balance += outcome.payout;
 
@@ -348,16 +429,35 @@ function spin(elem) {
 function setResult() {
   let payline = [];
 
-  for (let col of cols) {
-    // generate 3 random items
-    let results = [getRandomIcon(), getRandomIcon(), getRandomIcon()];
-    payline.push(results[1]);
+  // Check if we should guarantee a win after 5 spins without winning
+  if (spinsSinceLastWin >= 5) {
+    payline = getGuaranteedRandomWin();
+  } else {
+    // Normal random result
+    for (let col of cols) {
+      // generate 3 random items
+      let results = [getRandomIcon(), getRandomIcon(), getRandomIcon()];
+      payline.push(results[1]);
+    }
+  }
 
+  for (let col of cols) {
     let icons = col.querySelectorAll(".icon img");
-    // replace the first and last three items of each column with the generated items
-    for (let x = 0; x < 3; x++) {
-      updateIconImage(icons[x], results[x]);
-      updateIconImage(icons[icons.length - 3 + x], results[x]);
+
+    if (spinsSinceLastWin >= 5) {
+      // For guaranteed win, use the first 3 items of payline shuffled
+      let results = [payline[0], payline[1], payline[2]];
+      for (let x = 0; x < 3; x++) {
+        updateIconImage(icons[x], results[x]);
+        updateIconImage(icons[icons.length - 3 + x], results[x]);
+      }
+    } else {
+      // Normal random result
+      let results = [getRandomIcon(), getRandomIcon(), getRandomIcon()];
+      for (let x = 0; x < 3; x++) {
+        updateIconImage(icons[x], results[x]);
+        updateIconImage(icons[icons.length - 3 + x], results[x]);
+      }
     }
   }
 
