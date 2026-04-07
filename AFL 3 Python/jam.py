@@ -20,7 +20,7 @@ class JamTangan:
             obj.ukiran = teks
             return obj
         except Exception as e:
-            print(f"Error: {e}")
+            print(f"{e}")
 
 
     @staticmethod
