@@ -55,7 +55,7 @@ const GAME_SETTINGS = {
   THREE_OF_A_KIND_PAYOUT: 90,
 
   // Win limits
-  MAX_WINS_PER_SESSION: 2, // 0 = unlimited wins
+  MAX_WINS_PER_SESSION: 1, // 0 = unlimited wins
 };
 
 // Create shortcuts for easy access to settings
@@ -195,6 +195,9 @@ function applyWinLimit(outcome) {
     outcome.payout > 0 &&
     winsCount >= GAME_SETTINGS.MAX_WINS_PER_SESSION
   ) {
+    lossesCount++;
+    spinsSinceLastWin++;
+
     return {
       payout: 0,
       message: `Win limit reached (${GAME_SETTINGS.MAX_WINS_PER_SESSION} wins). You lose this spin.`,
@@ -251,6 +254,24 @@ function getGuaranteedRandomWin() {
     // Shuffle to make it look more natural
     payline = payline.sort(() => Math.random() - 0.5);
   }
+
+  return payline;
+}
+
+function isWinningPayline(payline) {
+  return evaluatePayout(payline).payout > 0;
+}
+
+function getGuaranteedLosingPayline() {
+  let payline = [];
+
+  // Keep generating until we get a strict loss (no 3+ matches, no jackpot).
+  do {
+    payline = [];
+    for (let i = 0; i < cols.length; i++) {
+      payline.push(getRandomIcon());
+    }
+  } while (isWinningPayline(payline));
 
   return payline;
 }
@@ -428,23 +449,34 @@ function spin(elem) {
  */
 function setResult() {
   let payline = [];
+  let forceAlwaysLose =
+    GAME_SETTINGS.MAX_WINS_PER_SESSION === 1 && winsCount >= 1;
 
-  // Check if we should guarantee a win after 5 spins without winning
-  if (spinsSinceLastWin >= 5) {
+  // After one win, every following spin should be a guaranteed loss.
+  if (forceAlwaysLose) {
+    payline = getGuaranteedLosingPayline();
+  } else if (spinsSinceLastWin >= 5) {
+    // Check if we should guarantee a win after 5 spins without winning
     payline = getGuaranteedRandomWin();
   } else {
     // Normal random result
-    for (let col of cols) {
-      // generate 3 random items
-      let results = [getRandomIcon(), getRandomIcon(), getRandomIcon()];
-      payline.push(results[1]);
+    for (let i = 0; i < cols.length; i++) {
+      payline.push(getRandomIcon());
     }
   }
 
-  for (let col of cols) {
+  for (let colIndex = 0; colIndex < cols.length; colIndex++) {
+    let col = cols[colIndex];
     let icons = col.querySelectorAll(".icon img");
 
-    if (spinsSinceLastWin >= 5) {
+    if (forceAlwaysLose) {
+      let centerIcon = payline[colIndex];
+      let results = [getRandomIcon(), centerIcon, getRandomIcon()];
+      for (let x = 0; x < 3; x++) {
+        updateIconImage(icons[x], results[x]);
+        updateIconImage(icons[icons.length - 3 + x], results[x]);
+      }
+    } else if (spinsSinceLastWin >= 5) {
       // For guaranteed win, use the first 3 items of payline shuffled
       let results = [payline[0], payline[1], payline[2]];
       for (let x = 0; x < 3; x++) {
