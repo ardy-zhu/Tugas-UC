@@ -55,7 +55,9 @@ try {
             $availableBahan = [];
             $resultAvail = mysqli_query(
                 $koneksi,
-                'SELECT bahan_id, nama, panjang_bahan FROM bahan_baku ORDER BY bahan_id ASC'
+                'SELECT bahan_id, nama, panjang_bahan FROM bahan_baku
+                 WHERE bahan_id NOT IN (SELECT bahan_id FROM hasil_produksi)
+                 ORDER BY bahan_id ASC'
             );
             while ($row = mysqli_fetch_assoc($resultAvail)) {
                 $availableBahan[] = $row;

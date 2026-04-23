@@ -203,7 +203,7 @@
                 tableBody.innerHTML = data.data.map((item) => {
                     const modelId = item.model_id ?? '-';
                     const nama = item.nama ?? '-';
-                    const panjang = item.panjang ?? '-';
+                    const panjang = item.panjang_model ?? item.panjang ?? '-';
                     const actionHtml = (item.model_id) ?
                         '<button class="btn-edit-row" type="button" data-edit-id="' + String(item.model_id) + '" data-edit-nama="' + String(nama).replace(/"/g, '&quot;') + '" data-edit-panjang="' + String(panjang) + '">Edit</button>' +
                         '<button class="btn-delete-row" type="button" data-delete-id="' + String(item.model_id) + '">Delete</button>' : '-';
@@ -237,7 +237,7 @@
             const isUpdate = modelIdInput !== '';
             const payload = {
                 nama: nama,
-                panjang: Number(panjang)
+                panjang_model: Number(panjang)
             };
 
             if (isUpdate) {

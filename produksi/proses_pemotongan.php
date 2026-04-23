@@ -192,7 +192,7 @@
         <button id="addBtn" class="pp-btn-add" type="button" disabled>+ Tambah ke Daftar</button>
     </div>
 
-    <div id="stagingSection" style="display:none; margin-bottom:24px;">
+    <div id="stagingSection" style="margin-bottom:24px;">
         <h2 style="margin-bottom:8px;">Daftar Pemotongan yang Akan Diproses</h2>
         <table id="stagingTable">
             <thead>
@@ -406,11 +406,10 @@
         function renderStaging() {
             rebuildBahanOptions();
             if (stagingList.length === 0) {
-                stagingSection.style.display = 'none';
+                stagingBody.innerHTML = '<tr><td colspan="7">Belum ada item di daftar.</td></tr>';
                 updateCalculation();
                 return;
             }
-            stagingSection.style.display = 'block';
             stagingBody.innerHTML = stagingList.map((item, idx) =>
                 '<tr>' +
                 '<td>' + (idx + 1) + '</td>' +
