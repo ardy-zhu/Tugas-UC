@@ -1,4 +1,4 @@
-# Dokumentasi Proses Produksi
+# Dokumentasi penggunaan aplikasi proses produksi 
 
 ## 1. Pembelian Bahan
 
