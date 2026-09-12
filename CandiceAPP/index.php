@@ -46,8 +46,10 @@
             include_once "penjualan\penjualan.php";
         } elseif ($_GET["act"] == "lap") {
             include_once "laporan\laporan.php";
+        } elseif (in_array($_GET["act"], ["lap1", "lap2", "lap3", "lap4"], true)) {
+            include_once "laporan\detail.php";
         } elseif ($_GET["act"] == "lain") {
-            include_once "LainLain.php";
+            include_once "lainlain\lainLain.php";
         } else {
             echo "<h2>Halaman tidak ditemukan</h2>";
         }

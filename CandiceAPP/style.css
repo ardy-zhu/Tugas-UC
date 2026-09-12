@@ -216,6 +216,93 @@ body {
 .btn-returProduksi:hover {
   background-color: #3498db;
 }
+.btn-laporan1 {
+  background-color: #1abc9c;
+}
+.btn-laporan1:hover {
+  background-color: #16a085;
+}
+.btn-laporan2 {
+  background-color: #3498db;
+}
+.btn-laporan2:hover {
+  background-color: #2980b9;
+}
+.btn-laporan3 {
+  background-color: #e67e22;
+}
+.btn-laporan3:hover {
+  background-color: #d35400;
+}
+.btn-laporan4 {
+  background-color: #8e44ad;
+}
+.btn-laporan4:hover {
+  background-color: #6c3483;
+}
+.btn-profil {
+  background-color: #34495e;
+}
+.btn-profil:hover {
+  background-color: #2c3e50;
+}
+.btn-dokumentasi {
+  background-color: #16a085;
+}
+.btn-dokumentasi:hover {
+  background-color: #117a65;
+}
+.btn-pengaturan {
+  background-color: #f39c12;
+}
+.btn-pengaturan:hover {
+  background-color: #d68910;
+}
+.btn-info {
+  background-color: #9b59b6;
+}
+.btn-info:hover {
+  background-color: #8e44ad;
+}
+
+.menu-description {
+  margin-bottom: 20px;
+  color: #666666;
+}
+
+.button-container .square-btn span {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.report-detail {
+  max-width: 650px;
+  padding: 20px;
+  border: 1px solid #d9e2f0;
+  border-radius: 10px;
+  background-color: #f8fbff;
+}
+
+.report-detail p {
+  line-height: 1.6;
+}
+
+.action-link,
+.action-link:visited {
+  display: inline-block;
+  margin: 10px 10px 10px 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: #2980b9;
+  text-decoration: none;
+}
+
+.action-link:hover {
+  background-color: #1f618d;
+}
 
 .btn-daftarHutang {
   background-color: #27ae60;
