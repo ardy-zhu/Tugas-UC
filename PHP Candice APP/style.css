@@ -1,0 +1,363 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.header {
+  background-color: rgb(161, 189, 241);
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  color: aliceblue;
+  text-align: center;
+  border-radius: 20px;
+}
+.navigation {
+  background-color: laliceblue;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 20px;
+  font-size: 12pt;
+  color: dimgrey;
+  text-align: justify;
+}
+.main {
+  background-color: laliceblue;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 20px 20px 20px;
+  font-size: 12pt;
+  color: dimgrey;
+}
+
+.footer {
+  background-color: rgb(70, 70, 70);
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 20px;
+  font-size: 10pt;
+  color: aliceblue;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.navigation a,
+.navigation a:link,
+.navigation a:active,
+.navigation a:visited {
+  text-decoration: none;
+  color: rgb(126, 125, 124);
+  border-radius: 10px;
+  border: 2px solid rgb(121, 152, 228);
+  padding: 10px 10px;
+  margin: 5px;
+  display: inline-block;
+}
+
+.navigation a:hover {
+  background-color: rgb(197, 222, 243);
+  color: Maliceblue;
+}
+
+.baris {
+  margin-top: 30px;
+}
+
+.baris::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.kolom2 {
+  float: left;
+  width: 45%;
+  padding: 0px 10px 0px 10px;
+}
+
+.tebal {
+  margin-top: 0px;
+  font-weight: bold;
+  color: orange;
+}
+
+.tipis {
+  margin-top: 0px;
+  font-weight: lighter;
+  color: dimgrey;
+}
+
+.kolom2 a,
+.kolom2 a:link,
+.kolom2 a:visited,
+.kolom2 a:active {
+  text-decoration: none;
+  color: rgb(31, 30, 30);
+  border-radius: 10px;
+  margin: 15px 1px 15px 1px;
+  padding: 10px 15px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.kolom2 a:hover {
+  background-color: orange;
+  color: Maliceblue;
+}
+
+.kolom3 {
+  float: left;
+  width: 30%;
+  margin-bottom: 20px;
+  padding: 5px 5px 10px 0px;
+  font-size: 9px;
+  text-align: center;
+}
+
+.kolom3 img {
+  width: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  gap: 15px;
+  max-width: 600px;
+}
+
+.button-container a,
+.button-container a:link,
+.button-container a:visited,
+.button-container a:active {
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  justify-content: center; /* Centers grid tracks */
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.square-btn {
+  width: 150px;
+  height: 150px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: white;
+  margin-top: 50px;
+}
+.btn-model {
+  background-color: #3498db;
+}
+.btn-model:hover {
+  background-color: #2980b9;
+}
+.btn-supplier {
+  background-color: #e74c3c;
+}
+.btn-supplier:hover {
+  background-color: #c0392b;
+}
+.btn-user {
+  background-color: #2ecc71;
+}
+.btn-user:hover {
+  background-color: #27ae60;
+}
+.btn-item {
+  background-color: #f39c12;
+}
+.btn-item:hover {
+  background-color: #d68910;
+}
+.btn-pelanggan {
+  background-color: #9b59b6;
+}
+.btn-pelanggan:hover {
+  background-color: #8e44ad;
+}
+.btn-pembelianBB {
+  background-color: #34495e;
+}
+.btn-pembelianBB:hover {
+  background-color: #2c3e50;
+}
+.btn-pembelianNonBB {
+  background-color: #16a085;
+}
+.btn-pembelianNonBB:hover {
+  background-color: #1abc9c;
+}
+.btn-retur {
+  background-color: #c0392b;
+}
+.btn-retur:hover {
+  background-color: #e74c3c;
+}
+.btn-returBahan {
+  background-color: #8e44ad;
+}
+.btn-returBahan:hover {
+  background-color: #9b59b6;
+}
+.btn-returProduksi {
+  background-color: #2980b9;
+}
+.btn-returProduksi:hover {
+  background-color: #3498db;
+}
+
+.btn-daftarHutang {
+  background-color: #27ae60;
+}
+.btn-daftarHutang:hover {
+  background-color: #2ecc71;
+}
+.btn-pengiriman {
+  background-color: #e67e22;
+}
+.btn-pengiriman:hover {
+  background-color: #d35400;
+}
+.btn-terima {
+  background-color: #3498db;
+}
+.btn-terima:hover {
+  background-color: #2980b9;
+}
+.btn-so-rumah {
+  background-color: #1abc9c;
+}
+.btn-so-rumah:hover {
+  background-color: #16a085;
+}
+.btn-so-toko {
+  background-color: #c0392b;
+}
+.btn-so-toko:hover {
+  background-color: #a93226;
+}
+.btn-so-model {
+  background-color: #8e44ad;
+}
+.btn-so-model:hover {
+  background-color: #7d3c98;
+}
+.btn-cek-stok {
+  background-color: #16a085;
+}
+.btn-cek-stok:hover {
+  background-color: #117a65;
+}
+.btn-ketersediaan {
+  background-color: #2980b9;
+}
+.btn-ketersediaan:hover {
+  background-color: #1f618d;
+}
+.btn-pemotongan {
+  background-color: #34495e;
+}
+.btn-pemotongan:hover {
+  background-color: #2c3e50;
+}
+.btn-retur-produksi-menu {
+  background-color: #c0392b;
+}
+.btn-retur-produksi-menu:hover {
+  background-color: #a93226;
+}
+.btn-penerimaan-hasil {
+  background-color: #16a085;
+}
+.btn-penerimaan-hasil:hover {
+  background-color: #117a65;
+}
+.btn-spk {
+  background-color: #8e44ad;
+}
+.btn-spk:hover {
+  background-color: #6c3483;
+}
+.btn-proses-pemotongan {
+  background-color: #e67e22;
+}
+.btn-proses-pemotongan:hover {
+  background-color: #ca6f1e;
+}
+
+.pemotongan-form {
+  display: grid;
+  gap: 10px;
+  max-width: 520px;
+  margin-bottom: 16px;
+}
+
+.pemotongan-form label {
+  font-weight: bold;
+}
+
+.pemotongan-form select,
+.pemotongan-form button {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #bfc9d9;
+}
+
+.pemotongan-form button {
+  background-color: #34495e;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.pemotongan-form button:hover {
+  background-color: #2c3e50;
+}
+
+.hasil-pemotongan {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.hasil-pemotongan.info {
+  background-color: #e8f1fb;
+  color: #1f3a5c;
+}
+
+.hasil-pemotongan.success {
+  background-color: #e9f8ef;
+  color: #1f5e37;
+}
+
+.hasil-pemotongan.error {
+  background-color: #fdeaea;
+  color: #8a1f1f;
+}
+
+.back-link,
+.back-link:link,
+.back-link:visited,
+.back-link:active {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #8e44ad;
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: inline-block;
+}
+
+.back-link:hover {
+  background-color: #6c3483;
+}
