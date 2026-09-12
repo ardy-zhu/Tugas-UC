@@ -130,6 +130,27 @@ body {
   max-width: 600px;
 }
 
+.pembelian-dropdown {
+  display: grid;
+  gap: 10px;
+  max-width: 420px;
+  margin: 30px 0;
+}
+
+.pembelian-dropdown label {
+  font-weight: bold;
+}
+
+.pembelian-dropdown select {
+  padding: 12px;
+  border: 1px solid #bfc9d9;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #34495e;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .button-container a,
 .button-container a:link,
 .button-container a:visited,

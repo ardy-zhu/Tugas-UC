@@ -11,12 +11,16 @@
 
 <body>
     <h1 class="judul-pembelian">Menu Pembelian</h1>
-    <div class="button-container">
-        <a href="index.php?act=pb2" class="square-btn btn-pembelianBB">Pembelian Bahan Baku</a>
-        <a href="index.php?act=pb3" class="square-btn btn-pembelianNonBB">Pembelian Non Bahan Baku</a>
-        <a href="pembelian\returBahan.php" class="square-btn btn-returBahan">Retur Bahan</a>
-        <a href="pembelian\returProduksi.php" class="square-btn btn-returProduksi">Retur Produksi</a>
-        <a href="pembelian\daftarHutang.php" class="square-btn btn-daftarHutang">Daftar Hutang ke Supplier</a>
+    <div class="pembelian-dropdown">
+        <label for="jenis-pembelian">Pilih menu pembelian:</label>
+        <select id="jenis-pembelian" onchange="if (this.value) window.location.href = this.value;">
+            <option value="">-- Pilih menu --</option>
+            <option value="index.php?act=pb2">Bahan Baku</option>
+            <option value="index.php?act=pb3">Non Bahan Baku</option>
+            <option value="pembelian/returBahan.php">Retur Bahan Baku</option>
+            <option value="pembelian/returProduksi.php">Retur Non Bahan Baku</option>
+            <option value="pembelian/daftarHutang.php">Daftar Hutang</option>
+        </select>
     </div>
 </body>
 
